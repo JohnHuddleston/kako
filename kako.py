@@ -12,11 +12,11 @@ import hashlib
 import random
 
 def newPass():
-	listOfFun = ['shootingstar', 'horny4porny', 'suilong', 'arse', 'intercourse', 'john', 'coitus', 'sexy', 
-	'Rick Harrison', 'And this is my pawn shop', 'Robbie Rotten', 'smol nozomi', 'todokete', 'butts', 
-	'Russians LOVE chicken nuggets, dude', 'GoooOOOOOd ShhiiiiIIIIttT (chorus: right there right there)']
+	listOfFun = ['we just used random strings', 'there\'s really nothing special about', 'our random password gen procedure',
+		    'but oh well, we had 24 hours', 'and it works, which is what counts', 'so', 'here\'s', 'some', 'random', 
+		     'strings', 'for the project']
 
-	pickedWord = listOfFun[random.randint(0,15)]
+	pickedWord = listOfFun[random.randint(0,10)]
 	hashedWord = hashlib.md5(pickedWord.encode())
 
 	goodPass = "G" + hashedWord.hexdigest()
