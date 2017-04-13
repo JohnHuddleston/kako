@@ -4,11 +4,6 @@
 #												     #
 #   Purpose: This is a tool to identify the same security loophole used by the Mirai botnet malware  #
 #            and to patch it on a specified network.					  	     #
-#   Dev team members:										     #
-#            Lead Architect - Ammar Zuberi							     #
-#            Supporting Developers:								     #
-#                           - Nihar Gudiseva							     #
-#                           - John Huddleston							     #
 #											             #
 ######################################################################################################
 
