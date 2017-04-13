@@ -8,23 +8,22 @@ import paramiko
 from paramiko.ssh_exception import AuthenticationException, SSHException, BadHostKeyException
 import socket
 from netaddr import IPNetwork
-import hashlib
 import random
+import string
 
 def newPass():
-	listOfFun = ['we just used random strings', 'there\'s really nothing special about', 'our random password gen procedure',
-		    'but oh well, we had 24 hours', 'and it works, which is what counts', 'so', 'here\'s', 'some', 'random', 
-		     'strings', 'for the project']
+	# This method takes the set of all ascii letters, digits, and punctuation marks then uses them to randomly generate
+	# a cryptographically secure 20-character long password
+	characters = string.ascii_letters + string.digits + string.punctuation
+	return "".join(random.SystemRandom().choice(characters) for x in range(20))
 
-	pickedWord = listOfFun[random.randint(0,10)]
-	hashedWord = hashlib.md5(pickedWord.encode())
-
-	goodPass = "G" + hashedWord.hexdigest()
-	return goodPass
-
+# List containing tuple representations of all default user/pass combinations for IoT device root accounts
 passwords = ('root', 'xc3511'), ('root', 'vizxv'), ('root', 'admin'), ('admin', 'admin'), ('root', '888888'), ('root', 'xmhdipc'), ('root', 'default'), ('root', 'juantech'), ('root', '123456'), ('root', '54321'), ('support', 'support'), ('root', ''), ('admin', 'password'), ('root', 'root'), ('root', '12345'), ('user', 'user'), ('admin', '(none)'), ('root', 'pass'), ('admin', 'admin1234'), ('root', '1111'), ('admin', 'smcadmin'), ('admin', '1111'), ('root', '666666'), ('root', 'password'), ('root', '1234'), ('root', 'klv123'), ('Administrator', 'admin'), ('service', 'service'), ('supervisor', 'supervisor'), ('guest', 'guest'), ('guest', '12345'), ('guest', '12345'), ('admin1', 'password'), ('administrator', '1234'), ('666666', '666666'), ('888888', '888888'), ('ubnt', 'ubnt'), ('root', 'klv1234'), ('root', 'Zte521'), ('root', 'hi3518'), ('root', 'jvbzd'), ('root', 'anko'), ('root', 'zlxx.'), ('root', '7ujMko0vizxv'), ('root', '7ujMko0admin'), ('root', 'system'), ('root', 'ikwb'), ('root', 'dreambox'), ('root', 'user'), ('root', 'realtek'), ('root', '00000000'), ('admin', '1111111'), ('admin', '1234'), ('admin', '12345'), ('admin', '54321'), ('admin', '123456'), ('admin', '7ujMko0admin'), ('admin', '1234'), ('admin', 'pass'), ('admin', 'meinsm'), ('tech', 'tech'), ('mother', 'fucker')
 
 def scanRange(interface, address, CIDR):
+	# This method scans a specified network range for open SSH and Telnet interfaces (only SSH currently supported for
+	# proof of concept @ HackPSU Spring 2017) then attempts to bruteforce into the roots accounts on all found IPs using
+	# the previously defined set of default manufacturer user/pass combinations for root access
 	print('[*] IT BEGINS: Starting scan via interface ' + interface)
 	print('[*] Checking if any devices have SSH or telnet open')
 
