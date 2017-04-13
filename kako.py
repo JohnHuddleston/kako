@@ -11,11 +11,20 @@ from netaddr import IPNetwork
 import random
 import string
 
-def newPass():
+def genPass():
 	# This method takes the set of all ascii letters, digits, and punctuation marks then uses them to randomly generate
 	# a cryptographically secure 20-character long password
 	characters = string.ascii_letters + string.digits + string.punctuation
 	return "".join(random.SystemRandom().choice(characters) for x in range(20))
+
+def newPass():
+	# This method calls genPass until it produces a password that meets the Linux root password standard of containing at
+	# least 1 capital letter
+	newPassword = genPass()
+	# Keep calling genPass until the resulting password has at least 1 capital letter
+	while (not any(x.isupper() for x in newPassword))
+		newPassword = genPass()
+	return newPassword
 
 # List containing tuple representations of all default user/pass combinations for IoT device root accounts
 passwords = ('root', 'xc3511'), ('root', 'vizxv'), ('root', 'admin'), ('admin', 'admin'), ('root', '888888'), ('root', 'xmhdipc'), ('root', 'default'), ('root', 'juantech'), ('root', '123456'), ('root', '54321'), ('support', 'support'), ('root', ''), ('admin', 'password'), ('root', 'root'), ('root', '12345'), ('user', 'user'), ('admin', '(none)'), ('root', 'pass'), ('admin', 'admin1234'), ('root', '1111'), ('admin', 'smcadmin'), ('admin', '1111'), ('root', '666666'), ('root', 'password'), ('root', '1234'), ('root', 'klv123'), ('Administrator', 'admin'), ('service', 'service'), ('supervisor', 'supervisor'), ('guest', 'guest'), ('guest', '12345'), ('guest', '12345'), ('admin1', 'password'), ('administrator', '1234'), ('666666', '666666'), ('888888', '888888'), ('ubnt', 'ubnt'), ('root', 'klv1234'), ('root', 'Zte521'), ('root', 'hi3518'), ('root', 'jvbzd'), ('root', 'anko'), ('root', 'zlxx.'), ('root', '7ujMko0vizxv'), ('root', '7ujMko0admin'), ('root', 'system'), ('root', 'ikwb'), ('root', 'dreambox'), ('root', 'user'), ('root', 'realtek'), ('root', '00000000'), ('admin', '1111111'), ('admin', '1234'), ('admin', '12345'), ('admin', '54321'), ('admin', '123456'), ('admin', '7ujMko0admin'), ('admin', '1234'), ('admin', 'pass'), ('admin', 'meinsm'), ('tech', 'tech'), ('mother', 'fucker')
